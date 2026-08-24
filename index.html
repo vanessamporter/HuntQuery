@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<title>HuntQuery | Rule-Based Network Query Translator</title>
+<style>
+:root{--bg:#07101f;--bg2:#0b132b;--panel:#101c33;--panel2:#162746;--panel3:#1f3a5f;--text:#f5f7fa;--muted:#aab4c3;--line:#2e4568;--accent:#d4af37;--accent-hover:#f2c94c;--accent-soft:rgba(212,175,55,.14);--good:#39c98a;--warn:#f2c94c;--bad:#e76f51}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,rgba(31,58,95,.42),transparent 34%),linear-gradient(145deg,var(--bg),var(--bg2) 58%,#0a1730);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}.wrap{max-width:1120px;margin:0 auto;padding:40px 22px 56px}.hero{margin-bottom:24px;padding-left:16px;border-left:4px solid var(--accent)}.hero h1{font-size:30px;margin:0 0 8px;letter-spacing:-.02em;color:#fff}.hero h1::after{content:"";display:inline-block;width:7px;height:7px;margin-left:10px;border-radius:50%;background:var(--accent);vertical-align:middle;box-shadow:0 0 16px rgba(212,175,55,.55)}.hero p{color:var(--muted);margin:0;max-width:850px}.hero-badge{display:inline-block;margin-top:10px;padding:4px 9px;border:1px solid var(--accent);border-radius:999px;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.01em}.grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}@media(max-width:850px){.grid{grid-template-columns:1fr}}.card{background:linear-gradient(180deg,rgba(16,28,51,.97),rgba(11,24,46,.97));border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.025)}label,.label{display:block;font-weight:700;margin-bottom:8px;color:#f8f9fb}.input-wrap{position:relative}textarea{width:100%;background:#091425;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px 84px 12px 12px;font:inherit;outline:none;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;min-height:128px;resize:vertical}.input-clear{position:absolute;right:10px;top:10px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:#11213a;color:var(--muted);cursor:pointer;font-weight:700}.input-clear:hover{color:#fff;border-color:var(--accent)}textarea::placeholder{color:#74849a}textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);background:#0a172a}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;transition:transform .12s ease,filter .12s ease,border-color .12s ease,background .12s ease}.btn.primary{background:var(--accent);color:#101623;border-color:var(--accent);box-shadow:0 5px 18px rgba(212,175,55,.16)}.btn:hover{filter:brightness(1.08);border-color:#60779a}.btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}.btn:active{transform:translateY(1px)}.btn.smallbtn{padding:6px 10px;font-size:12px}.target-picker{position:relative;max-width:520px}.target-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;background:#091425;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;font:inherit;font-weight:700}.target-trigger:hover,.target-trigger[aria-expanded="true"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.target-caret{color:var(--accent);font-size:12px}.target-menu{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 7px);background:#0b172a;border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.42);max-height:360px;overflow:auto}.target-menu.hidden{display:none}.target-menu-actions{display:flex;gap:8px;padding:4px 4px 8px;border-bottom:1px solid var(--line);margin-bottom:5px}.target-option{display:flex;gap:9px;align-items:flex-start;border-radius:8px;padding:9px 10px;color:var(--muted);cursor:pointer}.target-option:hover{background:#11213a;color:#fff}.target-option input{accent-color:var(--accent);margin-top:3px}.target-option-text{display:flex;flex-direction:column;gap:1px}.target-option-name{color:var(--text);font-weight:700}.target-option-desc{font-size:12px;color:var(--muted)}.selection-summary{margin-top:7px;color:var(--muted);font-size:12px}.output-card{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#0b172a;overflow:hidden}.output-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;background:#11213a;border-bottom:1px solid var(--line)}.output{background:#06101f;border-left:3px solid var(--accent);padding:15px;min-height:70px;white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#f7f3df}.small{font-size:13px;color:var(--muted)}.section{margin-top:16px}.badge{display:inline-flex;align-items:center;border:1px solid #3b5376;background:rgba(31,58,95,.34);border-radius:999px;padding:5px 9px;color:#c7d1df;font-size:12px;margin:4px 5px 0 0}.status{font-size:13px;margin-top:10px}.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}ul.clean{padding-left:19px;margin:8px 0;color:var(--muted)}code{color:#f0d778;background:rgba(212,175,55,.08);padding:1px 4px;border-radius:4px}.examples{display:flex;flex-wrap:wrap;gap:8px}.examples button{width:auto;text-align:left;margin:0;padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:#0b172a;color:var(--muted);cursor:pointer;transition:color .14s ease,border-color .14s ease,background .14s ease,transform .12s ease;font:inherit;font-size:13px}.examples button:hover{color:#fff;border-color:var(--accent);background:#11213a;transform:translateY(-1px)}.examples-help{font-size:12px;color:var(--muted);margin:0 0 10px}.footer{margin-top:18px;color:#7f8da1;font-size:12px;border-top:1px solid rgba(46,69,104,.6);padding-top:14px}.hidden{display:none}.errorbox{border:1px solid rgba(231,111,81,.65);background:rgba(231,111,81,.08);color:#ffb4a1;border-radius:10px;padding:10px 12px;margin-top:12px}.security-note{border:1px solid rgba(57,201,138,.35);background:rgba(57,201,138,.07);border-radius:10px;padding:10px 12px;color:#b8e8d2}::selection{background:rgba(212,175,55,.34);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>HuntQuery</h1>
+    <p>Rule-based network query translation. Enter plain language or paste supported query syntax; HuntQuery auto-detects it and converts it to the tools you select.</p>
+    <span class="hero-badge">No AI • No LLM • Runs locally</span>
+  </div>
+  <div class="grid">
+    <main class="card">
+      <form id="translationForm" novalidate>
+      <label for="plain">Describe what you want to find <span class="small">(Enter to translate · Shift+Enter for a new line)</span></label>
+      <div class="input-wrap"><textarea id="plain" maxlength="4096" placeholder="Plain language or query syntax, e.g. ip.src == 10.0.0.5 && port.dst == 443"></textarea><button type="button" id="clearInline" class="input-clear hidden" aria-label="Clear input">Clear</button></div>
+      <div id="inputError" class="errorbox hidden" role="alert"></div>
+
+      <div class="section">
+        <div class="label">Output targets <span class="small">(choose one or more)</span></div>
+        <div class="target-picker" id="targetPicker">
+          <button type="button" class="target-trigger" id="targetTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="targetMenu">
+            <span id="targetTriggerText">Choose tools</span><span class="target-caret">▼</span>
+          </button>
+          <div id="targetMenu" class="target-menu hidden" role="group" aria-label="Network tool targets">
+            <div class="target-menu-actions">
+              <button class="btn smallbtn" type="button" id="selectAll">All tools</button>
+              <button class="btn smallbtn" type="button" id="clearTargets">Clear</button>
+            </div>
+            <div id="targets"></div>
+          </div>
+        </div>
+        <div id="targetSummary" class="selection-summary" aria-live="polite"></div>
+      </div>
+      <div class="row">
+        <button class="btn primary" id="translate" type="submit">Translate</button>
+        <button class="btn" id="clear" type="button">Clear input</button>
+      </div>
+      </form>
+
+      <div class="section">
+        <div class="row" style="justify-content:space-between">
+          <div class="label" style="margin:0">Generated queries</div>
+          <button class="btn smallbtn" id="copyAll" type="button">Copy all</button>
+        </div>
+        <div id="outputs" aria-live="polite"></div>
+        <div id="copyStatus" class="small" role="status"></div>
+      </div>
+
+      <div id="timeSection" class="section hidden">
+        <div class="label">Time range</div>
+        <div id="time" class="output" style="min-height:auto"></div>
+        <div class="small" style="margin-top:6px">Apply this using each application's time controls.</div>
+      </div>
+
+      <div class="section"><div class="label">Interpretation</div><div id="explain" class="small">Nothing parsed yet.</div></div>
+      <div id="status" class="status"></div>
+    </main>
+
+    <aside class="card">
+      <div class="label">Try an example</div>
+      <p class="examples-help">Click an example to place it in the input box. You can edit it before translating.</p>
+      <div class="examples" id="examples">
+        <button>show traffic from 192.168.1.25 to port 443</button>
+        <button>find DNS queries containing microsoft from 10.20.0.0/16</button>
+        <button>show SMB traffic to 10.5.4.20</button>
+        <button>traffic involving 8.8.8.8 on ports 53 or 443</button>
+        <button>show HTTP responses with status code 404</button>
+        <button>show TLS traffic from 10.0.0.0/8 in the last 30 minutes</button>
+        <button>show traffic to countries RU or CN</button>
+        <button>show Suricata alerts from 10.0.0.5 to port 443</button>
+      </div>
+      <div class="section"><div class="label">Safety behavior</div><div class="security-note">No <code>eval</code>, no network calls, no HTML rendering from user input, CSP enabled, input length/control-character validation, and shell-safe quoting for generated <code>jq</code> commands.</div></div>
+      <div class="section"><div class="label">Supported</div><div><span class="badge">IP/CIDR</span><span class="badge">ports</span><span class="badge">DNS</span><span class="badge">hostname</span><span class="badge">HTTP</span><span class="badge">TLS</span><span class="badge">SSH</span><span class="badge">SMB</span><span class="badge">countries</span><span class="badge">alerts</span><span class="badge">time phrases</span><span class="badge">multi-target</span><span class="badge">query-to-query</span></div></div>
+    </aside>
+  </div>
+  <div class="footer">Generated queries should be reviewed and validated before use in production environments.</div>
+</div>
+<script src="translator-core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
